@@ -15,7 +15,7 @@
         }
 
         public function getPrecioConIVA(){
-            return (self::iva);
+            return $this->precio * (1 + self::IVA);
         }
     } 
 ?>
