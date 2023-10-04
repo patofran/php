@@ -12,7 +12,7 @@
         }
 
         public function muestraResumen(){
-            return "titulo: {$this->titulo}, numero: {$this->numero}, idioma {$this->idioma}, formato de la pantalla: {$this->formatPantalla}, precio Sin Iva: {$this->getPrecio()}";
+            return "titulo: {$this->titulo}, numero: {$this->numero}, idioma {$this->idiomas}, formato de la pantalla: {$this->formatPantalla}, precio Sin Iva: {$this->getPrecio()}";
         }
     }
 ?>
