@@ -4,7 +4,7 @@
         public $titulo;
         protected $numero;
         private $precio;
-        private const $iva = 0.21;
+        private const iva = 0.21;
 
         public function getTitulo(){
             return $this->titulo;
