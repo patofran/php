@@ -7,8 +7,6 @@
 </head>
 <body>
     <?php
-        include "Soporte.php";
-        include "CintaVideo.php";
         include "Dvd.php";
 
         $miDvd = new Dvd("Origen", 24, 15, "es,en,fr", "16:9");
