@@ -7,10 +7,6 @@
             $this->duracion = $duracion;
         }
 
-        public function getDuracion(){
-            return $this->duracion;
-        }
-
         public function muestraResumen(){
             return "titulo: {$this->titulo}, numero: {$this->numero}, duracion: {$this->duracion}, precio Sin Iva: {$this->getPrecio()}";
         }
