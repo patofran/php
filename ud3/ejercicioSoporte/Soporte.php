@@ -17,7 +17,7 @@
         }
 
         public function getNumero() {
-            return $this->numero;  // Cambiado de $this->codigo a $this->numero
+            return $this->numero; 
         }
 
         public function getPrecio(){
