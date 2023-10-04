@@ -15,7 +15,7 @@
         echo "<br>Precio: " . $soporte1->getPrecio() . " euros";
         echo "<br>Precio IVA incluido: " .
         $soporte1->getPrecioConIVA() . " euros";
-        $soporte1->muestraResumen();
+        echo $soporte1->muestraResumen() . "<br>";
     ?>
 </body>
 </html>
