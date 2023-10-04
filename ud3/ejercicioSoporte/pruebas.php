@@ -15,7 +15,7 @@
         echo "<br>Precio: " . $miDvd->getPrecio() . " euros";
         echo "<br>Precio IVA incluido: " .
         $miDvd->getPrecioConIva() . " euros";
-        $miDvd->muestraResumen();
+        echo $miDvd->muestraResumen();
     ?>
 </body>
 </html>
