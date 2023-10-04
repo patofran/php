@@ -1,6 +1,6 @@
 <?php
 
-    class Dvd{
+    class Dvd extends Soporte{
         private $idiomas;
         private $formatPantalla;
 
