@@ -15,7 +15,7 @@
         }
 
         public function getPrecioConIVA(){
-            return self::iva;
+            return (self::iva);
         }
     } 
 ?>
