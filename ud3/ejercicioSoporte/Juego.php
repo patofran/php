@@ -24,7 +24,7 @@
         }
 
         public function muestraResumen(){
-            return "titulo: {$this->titulo}, numero: {$this->numero}, consola {$this->consola}, {$this.muestraJugadoresPosibles()}, precio Sin Iva: {$this->getPrecio()}";
+            return "titulo: {$this->titulo}, numero: {$this->numero}, consola {$this->consola}, {$this->muestraJugadoresPosibles()}, precio Sin Iva: {$this->getPrecio()}";
         }
     }
 ?>
