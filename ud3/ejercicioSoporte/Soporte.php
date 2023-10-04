@@ -6,6 +6,12 @@
         private $precio;
         private const iva = 0.21;
 
+        public function __construct($titulo, $numero, $precio) {
+            $this->titulo = $titulo;
+            $this->numero = $numero;
+            $this->precio = $precio;
+        }
+
         public function getTitulo(){
             return $this->titulo;
         }
