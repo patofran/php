@@ -7,8 +7,8 @@
 </head>
 <body>
     <?php
-        include "Dvd.php";
-        include "Soporte.php";
+        include_once "Dvd.php";
+        include_once "Soporte.php";
 
         $miDvd = new Dvd("Origen", 24, 15, "es,en,fr", "16:9");
         echo "<strong>" . $miDvd->titulo . "</strong>";
