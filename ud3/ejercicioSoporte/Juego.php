@@ -13,8 +13,18 @@
             $this->maxJugadores = $maxJugadores;
         }
 
+        public function muestraJugadoresPosibles(){
+            if (($this->minJugadores == 1) && ($this->maxJugadores == 1)) {
+                return "Para un Jugador";
+            }else if ($this->minJugadores == $this->maxJugadores) {
+                return "para " . $this->minJugadores . " jugadores."
+            }else{
+                return "de " . $this->minJugadores . " a " . $this->maxJugadores;
+            }
+        }
+
         public function muestraResumen(){
-            return "titulo: {$this->titulo}, numero: {$this->numero}, consola {$this->consola}, precio Sin Iva: {$this->getPrecio()}";
+            return "titulo: {$this->titulo}, numero: {$this->numero}, consola {$this->consola}, {$this.muestraJugadoresPosibles()}, precio Sin Iva: {$this->getPrecio()}";
         }
     }
 ?>
