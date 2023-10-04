@@ -7,7 +7,7 @@
             $this->duracion = $duracion;
         }
 
-        public function getDduracion(){
+        public function getDuracion(){
             return $this->duracion;
         }
 
