@@ -29,7 +29,7 @@
         }
 
         public function muestraResumen(){
-            return "titulo: {$this->titulo} /numero: {$this->numero} /precio Sin Iva: {$this->precio}";
+            return "titulo: {$this->titulo}, numero: {$this->numero}, precio Sin Iva: {$this->precio}";
         }
     } 
 ?>
