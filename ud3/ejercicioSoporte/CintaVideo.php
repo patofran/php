@@ -12,7 +12,7 @@
         }
 
         public function muestraResumen(){
-            return "titulo: {$this->titulo}, numero: {$this->numero}, duracion: {$this->duracion}, precio Sin Iva: {$this->precio}";
+            return "titulo: {$this->titulo}, numero: {$this->numero}, duracion: {$this->duracion}, precio Sin Iva: ";
         }
     }
 ?>
