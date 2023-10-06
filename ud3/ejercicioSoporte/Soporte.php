@@ -1,5 +1,7 @@
 <?php
-    class abstract Soporte{
+
+    include_once "Interfaz.php";
+    abstract class Soporte implements Interfaz{
         
         public $titulo;
         protected $numero;
