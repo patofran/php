@@ -15,6 +15,8 @@
         $apellido1 = " ";
         $apellido2 = " ";
         $telefono = " ";
+        $contador = 0;
+        $conexion = mysqli_connect('localhost', 'agenda', 'agenda', 'agenda');
 
         if (isset($_GET['nombre']) && $_GET['nombre'] == "") {
             $nombre = "Error: falta el nombre.";
@@ -44,40 +46,47 @@
         
         if ($nombre == "" && $apellido1 == "" && $apellido2 == "" && $telefono == "") {
             echo '  
-            <form method="get">
-            <p>nombre: <input type="text" name="nombre" id="nombre"> ' . $nombre . '
-            </p>
+                <form method="get">
+                <p>nombre: <input type="text" name="nombre" id="nombre"> ' . $nombre . '
+                </p>
 
-            <p>primer apellido: <input type="text" name="apellido1" id="apellido1"> ' . $apellido1 . '
-            </p>
+                <p>primer apellido: <input type="text" name="apellido1" id="apellido1"> ' . $apellido1 . '
+                </p>
 
-            <p>segundo apellido: <input type="text" name="apellido2" id="apellido2"> ' . $apellido2 . '
-            </p>
+                <p>segundo apellido: <input type="text" name="apellido2" id="apellido2"> ' . $apellido2 . '
+                </p>
 
-            <p>Telefono: <input type="text" name="telefono" id="telefono"> ' . $telefono . '
-            </p>
+                <p>Telefono: <input type="text" name="telefono" id="telefono"> ' . $telefono . '
+                </p>
 
-            <input type="submit" value="Enviar" name="enviar" id="enviar">
-            </form>
-        ';
+                <input type="submit" value="Enviar" name="enviar" id="enviar">
+                </form>
+            ';
+
+            if (isset($_GET['nombre']) && isset($_GET['apellido1']) && isset($_GET['apellido2']) && isset($_GET['telefono'])) {
+                $contactoNuevo = new Contacto($_GET['nombre'], $_GET['apellido1'], $_GET['apellido2'], $_GET['telefono']);
+                
+                $conexion->query($contactoNuevo->guardarDatos());
+            }
+
         }else {
             echo '  
-            <form method="get">
-            <p>nombre: <input type="text" name="nombre" id="nombre"> ' . $nombre . '
-            </p>
+                <form method="get">
+                <p>nombre: <input type="text" name="nombre" id="nombre"> ' . $nombre . '
+                </p>
 
-            <p>primer apellido: <input type="text" name="apellido1" id="apellido1"> ' . $apellido1 . '
-            </p>
+                <p>primer apellido: <input type="text" name="apellido1" id="apellido1"> ' . $apellido1 . '
+                </p>
 
-            <p>segundo apellido: <input type="text" name="apellido2" id="apellido2"> ' . $apellido2 . '
-            </p>
+                <p>segundo apellido: <input type="text" name="apellido2" id="apellido2"> ' . $apellido2 . '
+                </p>
 
-            <p>Telefono: <input type="text" name="telefono" id="telefono"> ' . $telefono . '
-            </p>
+                <p>Telefono: <input type="text" name="telefono" id="telefono"> ' . $telefono . '
+                </p>
 
-            <input type="submit" value="Enviar" name="enviar" id="enviar">
-            </form>
-        ';
+                <input type="submit" value="Enviar" name="enviar" id="enviar">
+                </form>
+            ';
 
         $nombre = " ";
         $apellido1 = " ";
