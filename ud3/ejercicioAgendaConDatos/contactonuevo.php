@@ -34,7 +34,7 @@
             $apellido2 = "";
         }
 
-        if (isset($_GET['telefono']) == 0 ) {
+        if (isset($_GET['telefono']) && $_GET['telefono'] == "") {
             $telefono = "Error: falta el telefono.";
         }else {
             $telefono = "";
@@ -43,9 +43,7 @@
 
         
         if ($nombre == "" && $apellido1 == "" && $apellido2 == "" && $telefono == "") {
-
             $contactoNuevo = new Contacto($_GET['nombre'], $_GET['apellido1'], $_GET['apellido2'], $_GET['telefono']);
-
             echo $contactoNuevo->toString();
         }else {
             echo '  
@@ -65,6 +63,11 @@
             <input type="submit" value="Enviar" name="enviar" id="enviar">
             </form>
         ';
+
+        $nombre = " ";
+        $apellido1 = " ";
+        $apellido2 = " ";
+        $telefono = " ";
         }
 
     ?>

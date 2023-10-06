@@ -6,14 +6,6 @@
         private $apellido2;
         private $telefono;
 
-        public function __set ($atributo, $valor){
-            $this -> $atributo = $valor;
-        }
-
-        public function __get ($contenido){
-            return $this -> $contenido;
-        }
-
         public function __construct($nombre, $apellido1, $apellido2, $telefono){
             $this->nombre = $nombre;
             $this->apellido1 = $apellido1;
