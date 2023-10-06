@@ -43,8 +43,7 @@
 
         
         if ($nombre == "" && $apellido1 == "" && $apellido2 == "" && $telefono == "") {
-            $contactoNuevo = new Contacto($_GET['nombre'], $_GET['apellido1'], $_GET['apellido2'], $_GET['telefono']);
-            echo $contactoNuevo->toString();
+            
         }else {
             echo '  
             <form method="get">
