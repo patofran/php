@@ -19,7 +19,11 @@
             }else if ($this->minJugadores == $this->maxJugadores) {
                 return "para {$this->minJugadores} jugadores.";
             }else{
-                return "de {$this->minJugadores} a {$this->maxJugadores}";
+                if ($this->minJugadores < $this->maxJugadores) {
+                    return "de {$this->minJugadores} a {$this->maxJugadores} jugadores";
+                }else{
+                    return "de {$this->maxJugadores} a {$this->minJugadores} jugadores";
+                }
             }
         }
 
