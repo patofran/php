@@ -1,5 +1,5 @@
 <?php
-    class Soporte{
+    class abstract Soporte{
         
         public $titulo;
         protected $numero;
