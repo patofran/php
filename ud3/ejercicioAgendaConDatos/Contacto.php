@@ -23,7 +23,7 @@
         }
 
         public function guardarDatos(){
-            return "INSERT INTO `contactos` (`idContacto`, `nombre`, `apelldo1`, `apellido2`, `telefono`) VALUES ('" . $this->idContacto . "', '. $this->nombre .', '" . $this->apellido1 . "', '" . $this->apellido2 . "', '" . $this->telefono . "')";
+            return "INSERT INTO `contactos` (`idContacto`, `nombre`, `apellido1`, `apellido2`, `telefono`) VALUES ('" . $this->idContacto . "', '. $this->nombre .', '" . $this->apellido1 . "', '" . $this->apellido2 . "', '" . $this->telefono . "')";
         }
     }
 ?>
