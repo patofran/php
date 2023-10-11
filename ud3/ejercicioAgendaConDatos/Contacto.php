@@ -6,16 +6,11 @@
         private $apellido2;
         private $telefono;
 
-        private static $contador = 0;
-
         public function __construct($nombre, $apellido1, $apellido2, $telefono){
             $this->nombre = $nombre;
             $this->apellido1 = $apellido1;
             $this->apellido2 = $apellido2;
             $this->telefono = $telefono;
-
-            self::$contador++;
-            $this->idContacto = self::$contador;
         }
 
         public function __toString(){
@@ -23,7 +18,7 @@
         }
 
         public function guardarDatos(){
-            return "INSERT INTO `contactos` (`idContacto`, `nombre`, `apellido1`, `apellido2`, `telefono`) VALUES ('" . $this->idContacto . "', '. $this->nombre .', '" . $this->apellido1 . "', '" . $this->apellido2 . "', '" . $this->telefono . "')";
+            return "INSERT INTO `contactos` (`nombre`, `apellido1`, `apellido2`, `telefono`) VALUES ('" . $this->nombre . "', '" . $this->apellido1 . "', '" . $this->apellido2 . "', '" . $this->telefono . "')";
         }
     }
 ?>
