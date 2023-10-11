@@ -12,5 +12,5 @@
     echo "//Elimino el primer contacto.<br><br>";
     $agenda->borrarContacto();
     echo $agenda;
-    //fvjikdsngvjidsnvfojds
+    
 ?>
