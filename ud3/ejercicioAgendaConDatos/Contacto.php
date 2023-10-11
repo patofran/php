@@ -20,5 +20,7 @@
         public function guardarDatos(){
             return "INSERT INTO `contactos` (`nombre`, `apellido1`, `apellido2`, `telefono`) VALUES ('" . $this->nombre . "', '" . $this->apellido1 . "', '" . $this->apellido2 . "', '" . $this->telefono . "')";
         }
+
+        
     }
 ?>
