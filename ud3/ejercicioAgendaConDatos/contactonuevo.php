@@ -7,10 +7,15 @@
     </head>
 
     <body>
+    <h1>Manejo de los usuarios</h1>
+
     <?php
         include_once "Contacto.php";
 
         $contactos = array();
+        $conexion = new mysqli('localhost', 'agenda', 'agenda', 'agenda');
+
+
         $consulta = $conexion->query("Select * from contactos;");
         if ($consulta->num_rows > 0) {
             while ($datos = $consulta->fetch_assoc()) {
@@ -50,7 +55,6 @@
         
         if ($nombre == "" && $apellido1 == "" && $apellido2 == "" && $telefono == "") {
             echo '  
-                <h1>Manejo de los usuarios</h1>
 
                 <form method="get">
 
@@ -80,7 +84,6 @@
 
         }else {
             echo '  
-                <h1>Manejo de los usuarios</h1>
 
                 <form method="get">
                 <p>nombre: <input type="text" name="nombre" id="nombre"> ' . $nombre . '
