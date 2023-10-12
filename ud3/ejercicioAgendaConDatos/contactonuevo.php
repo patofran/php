@@ -53,6 +53,9 @@
                 <h1>Manejo de los usuarios</h1>
 
                 <form method="get">
+
+                <h1>Manejo de los contactos</h1>
+
                 <p>nombre: <input type="text" name="nombre" id="nombre"> ' . $nombre . '
                 </p>
 
