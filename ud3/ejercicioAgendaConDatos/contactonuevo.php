@@ -47,6 +47,9 @@
         if ($nombre == "" && $apellido1 == "" && $apellido2 == "" && $telefono == "") {
             echo '  
                 <form method="get">
+
+                <h1>Manejo de los contactos</h1>
+
                 <p>nombre: <input type="text" name="nombre" id="nombre"> ' . $nombre . '
                 </p>
 
