@@ -8,15 +8,21 @@
 
     <body>
     <?php
-
         include_once "Contacto.php";
+
+        $contactos = array();
+        $consulta = $conexion->query("Select * from contactos;");
+        if ($consulta->num_rows > 0) {
+            while ($datos = $consulta->fetch_assoc()) {
+                
+            }
+        }
+
 
         $nombre = " ";
         $apellido1 = " ";
         $apellido2 = " ";
         $telefono = " ";
-        $contador = 0;
-        $conexion = mysqli_connect('localhost', 'agenda', 'agenda', 'agenda');
 
         if (isset($_GET['nombre']) && $_GET['nombre'] == "") {
             $nombre = "Error: falta el nombre.";
@@ -41,11 +47,11 @@
         }else {
             $telefono = "";
         }
-
-
         
         if ($nombre == "" && $apellido1 == "" && $apellido2 == "" && $telefono == "") {
             echo '  
+                <h1>Manejo de los usuarios</h1>
+
                 <form method="get">
                 <p>nombre: <input type="text" name="nombre" id="nombre"> ' . $nombre . '
                 </p>
@@ -71,6 +77,8 @@
 
         }else {
             echo '  
+                <h1>Manejo de los usuarios</h1>
+
                 <form method="get">
                 <p>nombre: <input type="text" name="nombre" id="nombre"> ' . $nombre . '
                 </p>
@@ -93,8 +101,12 @@
         $apellido2 = " ";
         $telefono = " ";
         }
-        //$contactoNuevo = new Contacto($_GET['nombre'], $_GET['apellido1'], $_GET['apellido2'], $_GET['telefono']);
-        //echo $contactoNuevo->toString();
+        
+        echo '<h2>Lista de los contactos actuales.</h2>';
+
+        $consulta->close();
+        $conexion->close();
     ?>
+
     </body>
 </html>
