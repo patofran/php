@@ -13,8 +13,12 @@
             $this->telefono = $telefono;
         }
 
+        public function getTelefono(){
+            return $this->telefono;
+        }
+
         public function __toString(){
-            return "id contacto: " . $this->idContacto . "<br>nombre: . $this->nombre .<br>apellidos: " . $this->apellido1 . " " . $this->apellido2 . "<br>telefono: " . $this->telefono;
+            return " nombre: ". $this->nombre ." | apellidos: " . $this->apellido1 . " " . $this->apellido2 . " | telefono: " . $this->telefono;
         }
 
         public function guardarDatos(){

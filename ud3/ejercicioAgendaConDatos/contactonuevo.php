@@ -19,7 +19,7 @@
         $consulta = $conexion->query("Select * from contactos;");
         if ($consulta->num_rows > 0) {
             while ($datos = $consulta->fetch_assoc()) {
-                array_push(contactos, new Contacto($datos[nombre], $datos[]));
+                array_push($contactos, new Contacto($datos["nombre"], $datos["apellido1"], $datos["apellido2"], $datos["telefono"]));
             }
         }
 
@@ -50,7 +50,15 @@
         if (isset($_GET['telefono']) && $_GET['telefono'] == "") {
             $telefono = "Error: falta el telefono.";
         }else {
-            $telefono = "";
+            foreach ($contactos as $cont) {
+                if ($cont->getTelefono() == $_GET['telefono']) {
+                    $telefono = "Error: el telefono ya existe.";
+                    break;
+                }else {
+                    $telefono = "";
+                }
+            }
+            
         }
         
         if ($nombre == "" && $apellido1 == "" && $apellido2 == "" && $telefono == "") {
@@ -78,6 +86,7 @@
                 $contactoNuevo = new Contacto($_GET['nombre'], $_GET['apellido1'], $_GET['apellido2'], $_GET['telefono']);
                 
                 $conexion->query($contactoNuevo->guardarDatos());
+                array_push($contactos, $contactoNuevo);
             }
 
         }else {
@@ -107,6 +116,11 @@
         }
         
         echo '<h2>Lista de los contactos actuales.</h2>';
+
+        for ($i = 0; $i < count($contactos); $i++) { 
+            $contador = $i + 1;
+            echo "id: " . $contador . " | " . $contactos[$i] . "<br> <br>";
+        }
 
         $consulta->close();
         $conexion->close();
