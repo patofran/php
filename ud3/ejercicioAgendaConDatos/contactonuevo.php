@@ -7,7 +7,7 @@
     </head>
 
     <body>
-    <h1>Manejo de los usuarios</h1>
+    <h1>Manejo de los contactos.</h1>
 
     <?php
         include_once "Contacto.php";
@@ -19,7 +19,7 @@
         $consulta = $conexion->query("Select * from contactos;");
         if ($consulta->num_rows > 0) {
             while ($datos = $consulta->fetch_assoc()) {
-                
+                array_push(contactos, new Contacto($datos[nombre], $datos[]));
             }
         }
 
@@ -57,8 +57,6 @@
             echo '  
 
                 <form method="get">
-
-                <h1>Manejo de los contactos</h1>
 
                 <p>nombre: <input type="text" name="nombre" id="nombre"> ' . $nombre . '
                 </p>
