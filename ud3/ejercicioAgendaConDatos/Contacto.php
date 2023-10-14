@@ -25,6 +25,10 @@
             return "INSERT INTO `contactos` (`nombre`, `apellido1`, `apellido2`, `telefono`) VALUES ('" . $this->nombre . "', '" . $this->apellido1 . "', '" . $this->apellido2 . "', '" . $this->telefono . "')";
         }
 
-        
+        public function eliminarContacto(){
+            return "hola";
+        }
+
+        //"DELETE FROM contactos WHERE `contactos`.`telefono` = $this->telefono"
     }
 ?>

@@ -120,13 +120,11 @@
 
         for ($i = 0; $i < count($contactos); $i++) { 
             $contador = $i + 1;
-            echo "id: " . $contador . " | " . $contactos[$i] . " <a href='#' onclick='eliminarContacto(" . $contactos[$i] . ")'></a> <br> <br>";
+            echo "id: " . $contador . " | " . $contactos[$i] . " <a href='#' onclick='" . $contactos[$i]->eliminarContacto() . "'><img src='css/7602028.png' alt='Eliminar'></a> <br> <br>";
         }
 
         $consulta->close();
         $conexion->close();
     ?>
-
-    <img src="css/7602028.png" alt="Eliminar">
     </body>
 </html>
