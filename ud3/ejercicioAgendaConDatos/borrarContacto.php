@@ -13,12 +13,14 @@
 
             $contactos = array();
             $conexion = new mysqli('localhost', 'agenda', 'agenda', 'agenda');
-            $telefono = " ";
+            $idContacto = " ";
 
             $consulta = $conexion->query("Select * from contactos;");
             if ($consulta->num_rows > 0) {
                 while ($datos = $consulta->fetch_assoc()) {
-                    array_push($contactos, new Contacto($datos["nombre"], $datos["apellido1"], $datos["apellido2"], $datos["telefono"]));
+                    $contactoActual = new Contacto($datos["nombre"], $datos["apellido1"], $datos["apellido2"], $datos["telefono"]);
+                    array_push($contactos, $contactoActual);
+                    $contactoActual->setId($datos["idContacto"]);
                 }
             }
 
@@ -27,18 +29,21 @@
 
             for ($i = 0; $i < count($contactos); $i++) { 
                 $contador = $i + 1;
-                echo "id: " . $contador . " | " . $contactos[$i] . " <br> <br>";
+                echo $contactos[$i] . " <br> <br>";
             }
 
-            if (isset($_GET['telefono']) && $_GET['telefono'] == "") {
-                $telefono = "Error: falta el telefono.";
+            if (isset($_GET['idContacto']) && $_GET['idContacto'] == "") {
+                $idContacto = "Error: falta el idContacto.";
             }else {
                 foreach ($contactos as $cont) {
-                    if ($cont->getTelefono() == $_GET['telefono']) {
-                        $telefono = "Error: el telefono ya existe.";
-                        break;
+                    if ($cont->getidContacto() == $_GET['idContacto']) {
+                        $consulta = $conexion->query($cont->eliminarContacto());
+                        unset($contactos[$cont->getidContacto()]);
+                        $contactos = array_values($contactos);
+                        $idContacto = "Info: contacto eliminado con exito.";
                     }else {
-                        $telefono = "";
+                        $idContacto = "Error: el idContacto no existe.";
+                        break;
                     }
                 }
                 
@@ -46,7 +51,7 @@
 
             echo '  
                 <form method="get">
-                    <p>indica el telefono del contacto a eliminar: <input type="text" name="telefono" id="telefono"> ' . $telefono . '</p>
+                    <p>indica el id del contacto a eliminar: <input type="text" name="idContacto" id="idContacto"> ' . $idContacto . '</p>
                     <input type="submit" value="Enviar" name="enviar" id="enviar">
                 </form>
             ';

@@ -1,6 +1,6 @@
 <?php
     class Contacto{
-        private $idContacto;
+        private $idContacto = 0;
         private $nombre;
         private $apellido1;
         private $apellido2;
@@ -11,19 +11,22 @@
             $this->apellido1 = $apellido1;
             $this->apellido2 = $apellido2;
             $this->telefono = $telefono;
-            $this->idContacto = 0;
         }
 
         public function setId($id){
-            $idContacto = $id;
+            $this->idContacto = $id;
         }
 
+        public function getidContacto(){
+            return $this->idContacto;
+        }
+        
         public function getTelefono(){
             return $this->telefono;
         }
 
         public function __toString(){
-            return "idContacto: " . $this->idCcontacto . " | nombre: ". $this->nombre ." | apellidos: " . $this->apellido1 . " " . $this->apellido2 . " | telefono: " . $this->telefono;
+            return "idContacto: " . $this->idContacto . " | nombre: ". $this->nombre ." | apellidos: " . $this->apellido1 . " " . $this->apellido2 . " | telefono: " . $this->telefono;
         }
 
         public function guardarDatos(){
@@ -31,7 +34,7 @@
         }
 
         public function eliminarContacto(){
-            return "DELETE FROM contactos WHERE `contactos`.`telefono` = $this->telefono";
+            return "DELETE FROM contactos WHERE `contactos`.`idContacto` = $this->idContacto";
         }
 
         //
