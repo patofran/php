@@ -42,8 +42,6 @@
                         $contactos = array_values($contactos);
                         $idContacto = "Info: contacto eliminado con exito.";
                         break;
-                    }elseif ($cont->getidContacto() != $_GET['idContacto']) {
-                        $idContacto = "Error el id no existe"
                     }else{
                         $idContacto = "";
                     }
@@ -58,5 +56,8 @@
                 </form>
             ';
         ?> 
+
+
+        <p>Para volver a crear contactos pulse <a href="contactonuevo.php">aqui</a></p>
     </body>
 </html>

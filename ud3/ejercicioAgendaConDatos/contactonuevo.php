@@ -86,10 +86,16 @@
             ';
 
             if (isset($_GET['nombre']) && isset($_GET['apellido1']) && isset($_GET['apellido2']) && isset($_GET['telefono'])) {
-                $contactoNuevo = new Contacto($_GET['nombre'], $_GET['apellido1'], $_GET['apellido2'], $_GET['telefono']);
-                
+                $contactoNuevo = new Contacto($_GET['nombre'], $_GET['apellido1'], $_GET['apellido2'], $_GET['telefono']); 
                 $conexion->query($contactoNuevo->guardarDatos());
-                array_push($contactos, $contactoNuevo);
+
+                $consulta = $conexion->query("SELECT * FROM `contactos` WHERE `telefono` LIKE " . $contactoNuevo->getTelefono() . ";");
+                if ($consulta->num_rows > 0) {
+                    while ($datos = $consulta->fetch_assoc()) {
+                        array_push($contactos, $contactoNuevo);
+                        $contactoNuevo->setId($datos["idContacto"]);
+                    }
+                }
             }
 
         }else {
