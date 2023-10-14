@@ -41,9 +41,11 @@
                         unset($contactos[$cont->getidContacto()]);
                         $contactos = array_values($contactos);
                         $idContacto = "Info: contacto eliminado con exito.";
-                    }else {
-                        $idContacto = "Error: el idContacto no existe.";
                         break;
+                    }elseif ($cont->getidContacto() != $_GET['idContacto']) {
+                        $idContacto = "Error el id no existe"
+                    }else{
+                        $idContacto = "";
                     }
                 }
                 
