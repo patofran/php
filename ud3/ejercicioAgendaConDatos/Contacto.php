@@ -11,6 +11,11 @@
             $this->apellido1 = $apellido1;
             $this->apellido2 = $apellido2;
             $this->telefono = $telefono;
+            $this->idContacto = 0;
+        }
+
+        public function setId($id){
+            $idContacto = $id;
         }
 
         public function getTelefono(){
@@ -18,7 +23,7 @@
         }
 
         public function __toString(){
-            return " nombre: ". $this->nombre ." | apellidos: " . $this->apellido1 . " " . $this->apellido2 . " | telefono: " . $this->telefono;
+            return "idContacto: " . $this->idCcontacto . " | nombre: ". $this->nombre ." | apellidos: " . $this->apellido1 . " " . $this->apellido2 . " | telefono: " . $this->telefono;
         }
 
         public function guardarDatos(){

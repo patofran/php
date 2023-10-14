@@ -20,7 +20,9 @@
         $consulta = $conexion->query("Select * from contactos;");
         if ($consulta->num_rows > 0) {
             while ($datos = $consulta->fetch_assoc()) {
-                array_push($contactos, new Contacto($datos["nombre"], $datos["apellido1"], $datos["apellido2"], $datos["telefono"]));
+                $contactoActual = new Contacto($datos["nombre"], $datos["apellido1"], $datos["apellido2"], $datos["telefono"]);
+                array_push($contactos, $contactoActual);
+                $contactoActual->setId($datos["idContacto"]);
             }
         }
 
@@ -120,7 +122,7 @@
 
         for ($i = 0; $i < count($contactos); $i++) { 
             $contador = $i + 1;
-            echo "id: " . $contador . " | " . $contactos[$i] . " <a href='borrarcontacto.php'><img src='css/7602028.png' alt='Eliminar'></a> <br> <br>";
+            echo $contactos[$i] . " <a href='borrarcontacto.php'><img src='css/7602028.png' alt='Eliminar'></a> <br> <br>";
         }
 
         $consulta->close();
