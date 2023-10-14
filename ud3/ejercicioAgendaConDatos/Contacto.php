@@ -26,9 +26,9 @@
         }
 
         public function eliminarContacto(){
-            return "hola";
+            return "DELETE FROM contactos WHERE `contactos`.`telefono` = $this->telefono";
         }
 
-        //"DELETE FROM contactos WHERE `contactos`.`telefono` = $this->telefono"
+        //
     }
 ?>
