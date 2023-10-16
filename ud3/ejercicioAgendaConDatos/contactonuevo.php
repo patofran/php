@@ -31,7 +31,6 @@
         $apellido1 = " ";
         $apellido2 = " ";
         $telefono = " ";
-        $dentroTelefono = 0;
 
         if (isset($_GET['nombre']) && $_GET['nombre'] == "") {
             $nombre = "Error: falta el nombre.";
@@ -53,12 +52,10 @@
 
         if (isset($_GET['telefono']) && $_GET['telefono'] == "") {
             $telefono = "Error: falta el telefono.";
-        }else{
-            $dentroTelefono = $_GET['telefono'];
         }
 
         foreach ($contactos as $cont) {
-            if ($cont->getTelefono() == $dentroTelefonos) {
+            if ($cont->getTelefono() == $_GET['telefono']) {
                 $telefono = "Error: el telefono ya existe.";
                 break;
             }else {
