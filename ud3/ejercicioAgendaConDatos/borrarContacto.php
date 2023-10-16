@@ -34,29 +34,18 @@
 
             if (isset($_GET['idContacto']) && $_GET['idContacto'] == "") {
                 $idContacto = "Error: falta el idContacto.";
-            }else {
-                foreach ($contactos as $cont) {
-                    if ($cont->getidContacto() == $_GET['idContacto']) {
-                        $consulta = $conexion->query($cont->eliminarContacto());
-                        unset($contactos[$cont->getidContacto()]);
-                        $contactos = array_values($contactos);
-                        $idContacto = "Info: contacto eliminado con exito.";
-
-                        $consulta = $conexion->query("Select * from contactos;");
-                        if ($consulta->num_rows > 0) {
-                            while ($datos = $consulta->fetch_assoc()) {
-                                $contactoActual = new Contacto($datos["nombre"], $datos["apellido1"], $datos["apellido2"], $datos["telefono"]);
-                                array_push($contactos, $contactoActual);
-                                $contactoActual->setId($datos["idContacto"]);
-                            }
             }
 
-                        break;
-                    }else{
-                        $idContacto = "";
-                    }
+            foreach ($contactos as $cont) {
+                if ($cont->getidContacto() == $_GET['idContacto']) {
+                    $consulta = $conexion->query($cont->eliminarContacto());
+                    unset($contactos[$cont->getidContacto()]);
+                    $contactos = array_values($contactos);
+                    $idContacto = "Info: contacto eliminado con exito.";
+                    break;
+                }else{
+                    $idContacto = "";
                 }
-                
             }
 
             echo '  

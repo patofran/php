@@ -31,6 +31,7 @@
         $apellido1 = " ";
         $apellido2 = " ";
         $telefono = " ";
+        $dentroTelefono = 0;
 
         if (isset($_GET['nombre']) && $_GET['nombre'] == "") {
             $nombre = "Error: falta el nombre.";
@@ -52,16 +53,17 @@
 
         if (isset($_GET['telefono']) && $_GET['telefono'] == "") {
             $telefono = "Error: falta el telefono.";
-        }else {
-            foreach ($contactos as $cont) {
-                if ($cont->getTelefono() == $_GET['telefono']) {
-                    $telefono = "Error: el telefono ya existe.";
-                    break;
-                }else {
-                    $telefono = "";
-                }
+        }else{
+            $dentroTelefono = $_GET['telefono'];
+        }
+
+        foreach ($contactos as $cont) {
+            if ($cont->getTelefono() == $dentroTelefonos) {
+                $telefono = "Error: el telefono ya existe.";
+                break;
+            }else {
+                $telefono = "";
             }
-            
         }
         
         if ($nombre == "" && $apellido1 == "" && $apellido2 == "" && $telefono == "") {
@@ -86,14 +88,27 @@
             ';
 
             if (isset($_GET['nombre']) && isset($_GET['apellido1']) && isset($_GET['apellido2']) && isset($_GET['telefono'])) {
-                $contactoNuevo = new Contacto($_GET['nombre'], $_GET['apellido1'], $_GET['apellido2'], $_GET['telefono']); 
-                $conexion->query($contactoNuevo->guardarDatos());
+                if (empty($contactos)) {
+                    $contactoNuevo = new Contacto($_GET['nombre'], $_GET['apellido1'], $_GET['apellido2'], $_GET['telefono']); 
+                    $conexion->query($contactoNuevo->guardarDatosDeCero());
 
-                $consulta = $conexion->query("SELECT * FROM `contactos` WHERE `telefono` LIKE " . $contactoNuevo->getTelefono() . ";");
-                if ($consulta->num_rows > 0) {
-                    while ($datos = $consulta->fetch_assoc()) {
-                        array_push($contactos, $contactoNuevo);
-                        $contactoNuevo->setId($datos["idContacto"]);
+                    $consulta = $conexion->query("SELECT * FROM `contactos` WHERE `telefono` LIKE " . $contactoNuevo->getTelefono() . ";");
+                    if ($consulta->num_rows > 0) {
+                        while ($datos = $consulta->fetch_assoc()) {
+                            array_push($contactos, $contactoNuevo);
+                            $contactoNuevo->setId($datos["idContacto"]);
+                        }
+                    }
+                }else {
+                    $contactoNuevo = new Contacto($_GET['nombre'], $_GET['apellido1'], $_GET['apellido2'], $_GET['telefono']); 
+                    $conexion->query($contactoNuevo->guardarDatos());
+
+                    $consulta = $conexion->query("SELECT * FROM `contactos` WHERE `telefono` LIKE " . $contactoNuevo->getTelefono() . ";");
+                    if ($consulta->num_rows > 0) {
+                        while ($datos = $consulta->fetch_assoc()) {
+                            array_push($contactos, $contactoNuevo);
+                            $contactoNuevo->setId($datos["idContacto"]);
+                        }
                     }
                 }
             }
