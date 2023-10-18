@@ -12,11 +12,72 @@
         //primero acedemos a los contactos en la base de datos
         $conexion = new mysqli("localhost", "agenda", "agenda", "agenda");
         $consulta = $conexion->query("Select * from contactos;");
+
         //$insertar = $conexion->query("INSERT INTO `contactos` (`idContacto`, `nombre`, `apellido1`, `apellido2`, `telefono`) VALUES (NULL, '', '', '', '')");
         //$borrar = $conexion->query("DELETE FROM contactos WHERE `contactos`.`idContacto` = ");
+        //comprovamos que los datos del formulario estan correctos
+        
+        $infoNombre = " ";
+        $infoApellido1 = " ";
+        $infoApellido2 = " ";
+        $infoTelefono = " ";
+
+        $nombre;
+        $apellido1;
+        $apellido2;
+        $telefono = 0;
+
+        if (isset($_GET["nombre"])) {
+            if ($_GET["nombre"] == "") {
+                $infoNombre = "Error: falta el nombre.";
+            }else {
+                $infoNombre = "";
+                $nombre = $_GET["nombre"];
+            }
+        }
+
+        if (isset($_GET["apellido1"])) {
+            if ($_GET["apellido1"] == "") {
+                $infoApellido1 = "Error: falta el primer apellido.";
+            }else {
+                $infoApellido1 = "";
+                $apellido1 = $_GET["apellido1"];
+            }
+        }
+
+        if (isset($_GET["apellido2"])) {
+            if ($_GET["apellido2"] == "") {
+                $infoApellido2 = "Error: falta el segundo apellido.";
+            }else {
+                $infoApellido2 = "";
+                $apellido2 = $_GET["apellido2"];
+            }
+        }
+
+        //para el telefono nos tenemos que asegurar de que no exista en la tabla 
+
+        if (isset($_GET["telefono"])) {
+            if ($_GET["telefono"] == "") {
+                $infoTelefono = "Error: falta el telefono.";
+            }elseif (!is_numeric($_GET["telefono"])) {
+                $infoTelefono = "Error: formato del telefono incorrecto.";
+            }else {
+                $telefono = (int) $_GET["telefono"];
+                $infoTelefono = "";
+            }
+        }
+
+        //si todo esta correcto lo metemos en la base de datos
+
+        if ($infoNombre == "" && $infoApellido1 == "" && $infoApellido2 == "" && $infoTelefono == "") {
+            $conexion->query("INSERT INTO `contactos` (`idContacto`, `nombre`, `apellido1`, `apellido2`, `telefono`) VALUES (NULL, '$nombre', '$apellido1', '$apellido2', '$telefono')");
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit;
+        }
+
         //mostramos los contactos con una tabla con una condiciom que cada vez que se hace el post se actualiza
 
-        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if ($_SERVER["REQUEST_METHOD"] == "GET" || $ContactoNuevo) {
             echo "
                 <table>
                     <legend>Lista de los contactos</legend>
@@ -26,6 +87,7 @@
                         <td>Apellido 1</td>
                         <td>Apellido 2</td>
                         <td>Telefono</td>
+                        <td>Eliminar</td>
                     </tr> ";
 
                     if ($consulta->num_rows > 0) {
@@ -37,53 +99,27 @@
                                         <td>" . $datos['apellido1'] . "</td> 
                                         <td>" . $datos['apellido2'] . "</td> 
                                         <td>" . $datos['telefono'] . "</td>
+                                        <td><a href='" . $_SERVER['PHP_SELF'] . "?eliminar=" . $datos['idContacto'] . "'><img src='css/7602028.png' alt='Eliminar'></a></td>
                                     </tr>
                                 ";  
                         }
                     }
             echo "</table>";
         }
+
+        //aqui podemos eliminar el contacto
+
+        if (isset($_GET['eliminar'])) {
+            $idEliminar = $_GET['eliminar'];
         
-        //comprovamos que los datos del formulario estan correctos
+            $stmt = $conexion->prepare("DELETE FROM contactos WHERE idContacto = ?");
+            $stmt->bind_param("i", $idEliminar);
+            $stmt->execute();
+            $stmt->close();
         
-        $infoNombre = " ";
-        $infoApellido1 = " ";
-        $infoApellido2 = " ";
-        $infoTelefono = " ";
-
-        if (isset($_GET["nombre"]) && $_GET["nombre"] == "") {
-            $infoNombre = "Error: falta el nombre.";
-        }else {
-            $infoNombre = "";
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit;
         }
-
-        if (isset($_GET["apellido1"]) && $_GET["apellido1"] == "") {
-            $infoApellido1 = "Error: falta el primer apellido.";
-        }else {
-            $infoApellido1 = "";
-        }
-
-        if (isset($_GET["apellido2"]) && $_GET["apellido2"] == "") {
-            $infoApellido2 = "Error: falta el segundo apellido.";
-        }else {
-            $infoApellido2 = "";
-        }
-
-        //para el telefono nos tenemos que asegurar de que no exista en la tabla 
-
-        if ($_SERVER["REQUEST_METHOD"] == "GET") {
-            $telefono = $conexion->real_escape_string($_GET['telefono']);
-            $verTelefono = $conexion->query("SELECT * FROM contactos WHERE telefono = " . $telefono . ";");
-
-            if (isset($_GET["telefono"]) && $_GET["telefono"] == "") {
-                $infoTelefono = "Error: falta el telefono.";
-            }elseif ($verTelefono->num_rows > 0) {
-                $infoTelefono = "Error: el telefono ya existe.";
-            }else {
-                $infoTelefono = "";
-            }
-        }
-
 
         echo "
             <h2>Nuevo contacto.</h2>
@@ -108,6 +144,7 @@
             </form>
         ";
 
+        $conexion->close();
     ?>
 </body>
 </html>
