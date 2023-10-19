@@ -155,7 +155,6 @@
             $stmt->fetch();
             $stmt->close();
         }
-        
 
         echo "
             <h2>Nuevo contacto.</h2>
@@ -181,5 +180,6 @@
         
         $conexion->close();
     ?>
+    
 </body>
 </html>
