@@ -12,9 +12,6 @@
         //primero acedemos a los contactos en la base de datos
         $conexion = new mysqli("localhost", "agenda", "agenda", "agenda");
         $consulta = $conexion->query("Select * from contactos;");
-
-        //$insertar = $conexion->query("INSERT INTO `contactos` (`idContacto`, `nombre`, `apellido1`, `apellido2`, `telefono`) VALUES (NULL, '', '', '', '')");
-        //$borrar = $conexion->query("DELETE FROM contactos WHERE `contactos`.`idContacto` = ");
         //comprovamos que los datos del formulario estan correctos
         
         $infoNombre = " ";
@@ -25,7 +22,7 @@
         $nombre;
         $apellido1;
         $apellido2;
-        $telefono = 0;
+        $telefono;
 
         if (isset($_GET["nombre"])) {
             if ($_GET["nombre"] == "") {
@@ -67,10 +64,16 @@
             }
         }
 
-        //si todo esta correcto lo metemos en la base de datos
+         //si todo esta correcto lo metemos en la base de datos
 
-        if ($infoNombre == "" && $infoApellido1 == "" && $infoApellido2 == "" && $infoTelefono == "") {
+         if ($infoNombre == "" && $infoApellido1 == "" && $infoApellido2 == "" && $infoTelefono == "") {
             $conexion->query("INSERT INTO `contactos` (`idContacto`, `nombre`, `apellido1`, `apellido2`, `telefono`) VALUES (NULL, '$nombre', '$apellido1', '$apellido2', '$telefono')");
+
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit;
+        }else {
+            $conexion->query("UPDATE `contactos` SET `nombre` = '$nombre', `apellido1` = '$apellido1', `apellido2` = '$apellido2', `telefono` = '$telefono' WHERE `contactos`.`idContacto` = '$idContacto'");
+    
             header("Location: " . $_SERVER['PHP_SELF']);
             exit;
         }
@@ -88,6 +91,7 @@
                         <td>Apellido 2</td>
                         <td>Telefono</td>
                         <td>Eliminar</td>
+                        <td>Modificar</td>
                     </tr> ";
 
                     if ($consulta->num_rows > 0) {
@@ -100,6 +104,7 @@
                                         <td>" . $datos['apellido2'] . "</td> 
                                         <td>" . $datos['telefono'] . "</td>
                                         <td><a href='" . $_SERVER['PHP_SELF'] . "?eliminar=" . $datos['idContacto'] . "'><img src='css/7602028.png' alt='Eliminar'></a></td>
+                                        <td><a href='" . $_SERVER['PHP_SELF'] . "?editar=" . $datos['idContacto'] . "'><img src='css/lapiz.png' alt='Eliminar'></a></td>
                                     </tr>
                                 ";  
                         }
@@ -111,17 +116,52 @@
 
         if (isset($_GET['eliminar'])) {
             $idEliminar = $_GET['eliminar'];
-        
-            $stmt = $conexion->prepare("DELETE FROM contactos WHERE idContacto = ?");
-            $stmt->bind_param("i", $idEliminar);
-            $stmt->execute();
-            $stmt->close();
-        
+
+            $eliminado = $conexion->prepare("DELETE FROM contactos WHERE idContacto = ?");
+            $eliminado->bind_param("i", $idEliminar);
+            $eliminado->execute();
+            $eliminado->close();
+
             header("Location: " . $_SERVER['PHP_SELF']);
             exit;
         }
 
-        echo "
+        //aqui en el momento que una persona pulsa el icono de modificar lo ponemos en el formulario
+
+        if (isset($_GET['editar'])) {
+            $idContacto = $_GET['editar'];
+        
+            $editar = $conexion->prepare("SELECT nombre, apellido1, apellido2, telefono FROM contactos WHERE idContacto = ?");
+            $editar->bind_param("i", $idContacto);
+            $editar->execute();
+            $editar->bind_result($nombre, $apellido1, $apellido2, $telefono);
+            $editar->fetch();
+            $editar->close();
+
+            echo "
+            <h2>Nuevo contacto.</h2>
+            <form action = '" . $_SERVER["PHP_SELF"] . "' method = 'get'>
+                <p>idContacto: </p>
+                <input type = 'text' name = 'idContacto' id = 'idContacto' disabled value = '$idContacto'>
+                        
+                <p>nombre: " . $infoNombre . " </p>
+                <input type = 'text' name = 'nombre' id = 'nombre' value = '$nombre'> 
+        
+                <p>Apellido 1: " . $infoApellido1 . " </p>
+                <input type = 'text' name = 'apellido1' id = 'apellido1' value = '$apellido1'>
+        
+                <p>Apellido 2: " . $infoApellido2 . " </p>
+                <input type = 'text' name = 'apellido2' id = 'apellido2' value = '$apellido2'>
+        
+                <p>Telefono: " . $infoTelefono . " </p>
+                <input type = 'text' name = 'telefono' id = 'telefono' value = '$telefono'>
+
+                <br><br> 
+                <input type= 'submit' value = 'Actualizar'>                
+            </form>";
+
+        }else{
+            echo "
             <h2>Nuevo contacto.</h2>
             <form action = '" . $_SERVER["PHP_SELF"] . "' method = 'get'>
                 <p>idContacto: </p>
@@ -140,10 +180,10 @@
                 <input type = 'text' name = 'telefono' id = 'telefono'>
                 
                 <br><br>
-                <input type = 'submit' value = 'Enviar'>
-            </form>
-        ";
-
+                <input type= 'submit' value = 'Enviar'> 
+            </form>";
+        }
+        
         $conexion->close();
     ?>
 </body>

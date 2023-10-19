@@ -17,3 +17,8 @@ img{
     height: 30px;
     width: 30px;
 }
+
+a{
+    color: black;
+    text-decoration: none;
+}
