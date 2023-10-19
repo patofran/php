@@ -11,7 +11,7 @@
     <?php
         //primero acedemos a los contactos en la base de datos
         $conexion = new mysqli("localhost", "agenda", "agenda", "agenda");
-        $consulta = $conexion->query("Select * from contactos;");
+        
         //comprovamos que los datos del formulario estan correctos
         
         $infoIdContacto = " ";
@@ -72,8 +72,18 @@
             }elseif (!is_numeric($_GET["telefono"])) {
                 $infoTelefono = "Error: formato del telefono incorrecto.";
             }else {
-                $telefono = (int) $_GET["telefono"];
-                $infoTelefono = "";
+                $consulta = $conexion->query("Select telefono from contactos;");
+                if ($consulta->num_rows > 0) {
+                    while ($telefonos = $consulta->fetch_assoc()) {
+                        if ($_GET["telefono"] == $telefonos['telefono']) {
+                            $infoTelefono = "El telofono ya existe.";                 
+                        }else {
+                            $telefono = (int) $_GET["telefono"];
+                            $infoTelefono = "";
+                            $break;
+                        }
+                    }
+                }
             }
         }
 
@@ -96,6 +106,7 @@
         }
 
         //mostramos los contactos con una tabla con una condiciom que cada vez que se hace el post se actualiza
+        $consulta = $conexion->query("Select * from contactos;");
 
         if ($_SERVER["REQUEST_METHOD"] == "GET" || $ContactoNuevo) {
             echo "
