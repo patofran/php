@@ -72,17 +72,13 @@
             }elseif (!is_numeric($_GET["telefono"])) {
                 $infoTelefono = "Error: formato del telefono incorrecto.";
             }else {
-                $consulta = $conexion->query("Select telefono from contactos;");
+                $telefono = (int) $_GET["telefono"];
+                $consulta = $conexion->query("SELECT `telefono` FROM contactos WHERE `telefono` = $telefono");
                 if ($consulta->num_rows > 0) {
-                    while ($telefonos = $consulta->fetch_assoc()) {
-                        if ($_GET["telefono"] == $telefonos['telefono']) {
-                            $infoTelefono = "El telofono ya existe.";                 
-                        }else {
-                            $telefono = (int) $_GET["telefono"];
-                            $infoTelefono = "";
-                            $break;
-                        }
-                    }
+                    $infoTelefono = "El telofono ya existe.";  
+                    $telefono = NULL;               
+                }else {
+                    $infoTelefono = "";
                 }
             }
         }
