@@ -1,43 +1,27 @@
 <?php
     class Conexion {
-        private static $host = 'localhost';
-        private static $usuario = 'fotos';
-        private static $clave = 'fotos';
-        private static $baseDatos = 'ejerfotosusuarios';
-        private static $conexion;
+        private $host = 'localhost';
+        private $usuario = 'fotos';
+        private $clave = 'fotos';
+        private $baseDatos = 'ejerfotosusuarios';
+        private $conexion;
 
         private function __construct() {
         }
 
         public static function obtenerConexion() {
-            if (!isset(self::$conexion)) {
+            if (!isset($this->conexion)) {
                 try {
-                    $dsn = "mysql:host=" . self::$host . ";dbname=" . self::$baseDatos;
-                    self::$conexion = new PDO($dsn, self::$usuario, self::$clave);
-
-                    // Configuración adicional (opcional)
-                    self::$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    self::$conexion->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+                    $opc = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
+                    $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->baseDatos;
+                    $this->conexion = new PDO($dsn, $this->usuario, $this->clave, $opc);
 
                 } catch (PDOException $e) {
                     die("Error de conexión: " . $e->getMessage());
                 }
             }
 
-            return self::$conexion;
-        }
-
-        // Método estático para cerrar la conexión a la base de datos
-        public static function cerrarConexion() {
-            self::$conexion = null;
-            echo "Conexión cerrada";
+            return $this->conexion;
         }
     }
-
-    // Uso de la clase
-    $conexion = Conexion::obtenerConexion();
-
-    // Aquí puedes realizar operaciones en la base de datos
-
-    Conexion::cerrarConexion();
 ?>
