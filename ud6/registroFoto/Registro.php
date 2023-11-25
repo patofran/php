@@ -5,45 +5,30 @@
 
     $usuario;
     $cont;
+    $todoBien = false; 
     $errorFoto;
+    $rutaFotoGrande;
+    $rutaFotoPeque;
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST["cont"]) && isset($_POST["usu"])) {
-            $cont = password_hash($_POST["cont"], PASSWORD_DEFAULT);
-            $usuario = $_POST["usu"];
-    
-            $directorioImagenes = "img/usuarios/$usuario";
-            if (!is_dir($directorioImagenes)) {
-                mkdir($directorioImagenes, 0777, true);
-            }
-    
-            $fotoPerfil = $_FILES["fotoPerfil"];
-    
-            if ($fotoPerfil["error"] === UPLOAD_ERR_OK) {
-                $fotoGrande = imagecreatefrompng($fotoPerfil["tmp_name"]);
-                $rutaFotoGrande = "$directorioImagenes/{$usuario}_grande.png";
-    
-                list($ancho, $alto) = getimagesize($fotoPerfil["tmp_name"]);
-                if ($ancho > 360 || $alto > 480) {
-                    $errorFoto = "Error: La imagen debe tener un tamaño máximo de 360x480px.";
-                } else {
-                    imagepng($fotoGrande, $rutaFotoGrande);
-    
-                    $fotoPeque = imagescale($fotoGrande, 72, 96);
-                    $rutaFotoPeque = "$directorioImagenes/{$usuario}_pequena.png";
-                    imagepng($fotoPeque, $rutaFotoPeque);
-    
-                    imagedestroy($fotoGrande);
-                    imagedestroy($fotoPeque);
-    
-                    $conexion->query("INSERT INTO `usuarios` (`idUsuario`, `nombre`, `pass`, `urlFotoGrande`, `urlFotosPeque`) VALUES (NULL, '$usuario', '$cont', '$rutaFotoGrande', '$rutaFotoPeque')");
-                    header("Location: LogIn.php?nuevo=$usuario");
-                    exit(); 
-                }
-            } else {
-                $errorFoto = "Error al cargar la imagen.";
-            }
+    if (isset($_FILES["fotosPerfil"]) && isset($_POST["cont"]) && isset($_POST["usu"])) {
+
+        $cont = password_hash($_POST["cont"], PASSWORD_DEFAULT);
+        $usuario = $_POST["usu"];
+
+        $directorioImagenes = "img/usuarios/$usuario";
+        if (!is_dir($directorioImagenes)) {
+            mkdir($directorioImagenes, 0777, true);
         }
+
+        $fotoPerfil = $_FILES["fotoPerfil"];
+
+        print $fotoPerfil["size"];
+        $errorFoto = $fotoPerfil["size"];
+    }
+
+    if ($todoBien) {
+        $conexion->query("INSERT INTO `usuarios` (`idUsuario`, `nombre`, `pass`, `urlFotoGrande`, `urlFotosPeque`) VALUES (NULL, '$usuario', '$cont', $rutaFotoGrande, $rutaFotoPeque)");
+        header("Location: LogIn.php?nuevo=$usuario");
     }
 ?>
 
@@ -65,7 +50,7 @@
                 <p>Contraseña: </p>
                 <input type="password" id="cont" name="cont" required><br><br>
 
-                <p>Foto de perfil (Importante tiene que ser de 360 pixeles de anncho x 480 pixeles de largo)</p>
+                <p>Foto de perfil (Importante tiene que ser de 360 pixeles de ancho x 480 pixeles de largo)</p>
                 <input type="file" name="fotoPerfil" accept="image/png, image/jpg" required><br><br>
 
                 <p><?php if (isset($errorFoto)) { echo $errorFoto; } ?></p>
