@@ -7,28 +7,30 @@
     $cont;
     $todoBien = false; 
     $errorFoto;
-    $rutaFotoGrande;
-    $rutaFotoPeque;
+    $rutaFoto;
 
-    if (isset($_FILES["fotosPerfil"]) && isset($_POST["cont"]) && isset($_POST["usu"])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_FILES["fotoPerfil"]) && isset($_POST["cont"]) && isset($_POST["usu"])) {
+            $fotoPerfil = $_FILES["fotoPerfil"];
+            $cont = password_hash($_POST["cont"], PASSWORD_DEFAULT);
+            $usuario = $_POST["usu"];
+            
+            $directorioImagenes = "img/usuarios/$usuario";
+            if (!is_dir($directorioImagenes)) {
+                mkdir($directorioImagenes, 0777, true);
+            }
 
-        $cont = password_hash($_POST["cont"], PASSWORD_DEFAULT);
-        $usuario = $_POST["usu"];
-
-        $directorioImagenes = "img/usuarios/$usuario";
-        if (!is_dir($directorioImagenes)) {
-            mkdir($directorioImagenes, 0777, true);
+            list($ancho, $alto) = getimagesize($fotoPerfil["tmp_name"]);
+            if ($ancho > 360 || $alto > 480) {
+                $errorFoto = "Error: La imagen debe tener un tamaño máximo de 360x480px.";
+            } else {
+                $rutaFoto =  $directorioImagenes . "/" . $fotoPerfil["name"];
+                move_uploaded_file($fotoPerfil["tmp_name"], $rutaFoto);
+                $conexion->query("INSERT INTO `usuarios` (`idUsuario`, `nombre`, `pass`, `urlFoto`) VALUES (NULL, '$usuario', '$cont', '$rutaFoto')");
+                header("Location: LogIn.php?nuevo=$usuario");
+                $errorFoto = "";
+            }
         }
-
-        $fotoPerfil = $_FILES["fotoPerfil"];
-
-        print $fotoPerfil["size"];
-        $errorFoto = $fotoPerfil["size"];
-    }
-
-    if ($todoBien) {
-        $conexion->query("INSERT INTO `usuarios` (`idUsuario`, `nombre`, `pass`, `urlFotoGrande`, `urlFotosPeque`) VALUES (NULL, '$usuario', '$cont', $rutaFotoGrande, $rutaFotoPeque)");
-        header("Location: LogIn.php?nuevo=$usuario");
     }
 ?>
 
@@ -51,7 +53,7 @@
                 <input type="password" id="cont" name="cont" required><br><br>
 
                 <p>Foto de perfil (Importante tiene que ser de 360 pixeles de ancho x 480 pixeles de largo)</p>
-                <input type="file" name="fotoPerfil" accept="image/png, image/jpg" required><br><br>
+                <input type="file" name="fotoPerfil" required><br><br>
 
                 <p><?php if (isset($errorFoto)) { echo $errorFoto; } ?></p>
 

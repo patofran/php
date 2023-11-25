@@ -16,10 +16,10 @@
         $exsiste = $consulta->fetch();
 
         if ($exsiste) {
-            $hashUsuario = $exsiste["password"];
+            $hashUsuario = $exsiste["pass"];
             if (password_verify($cont, $hashUsuario)) {
                 setcookie("sesionUsuario", $usu, 0, "/");
-                header("Location: index.php");
+                header("Location: Perfil.php");
                 exit;
             }else {
                 $infoError = "La contraseña no esta bien";
