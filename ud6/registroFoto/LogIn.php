@@ -1,12 +1,7 @@
 <?php
-    session_start();
-
-    $opc = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
-    try {
-        $conexion = new PDO('mysql:host=localhost;dbname=discografia', 'disco', 'disco', $opc);
-    } catch (PDOException $e) {
-        echo 'Falló la conexión: ' . $e->getMessage();
-    }
+    
+    require_once('Conexion.inc.php');
+    $conexion = Conexion::obtenerConexion();
 
     $usuario;
     $cont;
@@ -16,7 +11,7 @@
         $cont = $_GET["cont"];
         $usu = $_GET["usu"];
 
-        $consulta = $conexion->prepare("SELECT `password` FROM `tabla_usuarios` WHERE `usuario` LIKE ?;");
+        $consulta = $conexion->prepare("SELECT `pass` FROM `usuarios` WHERE `nombre` LIKE ?;");
         $consulta->execute([$usu]);
         $exsiste = $consulta->fetch();
 
@@ -58,7 +53,7 @@
                 if (isset($_GET["respuesta"])) {
                     $res = $_GET["respuesta"];
                     if ($res == "si") {
-                        header("Location: index.php");
+                        header("Location: Perfil.php");
                         exit;
                     }
                     
