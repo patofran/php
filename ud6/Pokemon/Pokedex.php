@@ -1,27 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
-</head>
-<body>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pokedex</title>
+    </head>
+    <body>
 
-<?php
-    $enlace = "https://pokeapi.co/api/v2/pokemon/?limit=151";
-    $json_data = file_get_contents($enlace);
-    $pokemon_list = json_decode($json_data);
+        <?php
 
-    echo "<h2>Lista de los 10 primeros Pokémon:</h2>";
-    echo "<ul>";
+            $ch = curl_init(); 
+            $url = "https://pokeapi.co/api/v2/pokemon/?limit=20";
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $json_data = curl_exec($ch);
+            curl_close($ch);
 
-    foreach ($pokemon_list->results as $pokemon) {
-        echo "<li>Nombre: " . ucfirst($pokemon->name) . "</li>";
-    }
+            $arrayPokemon = json_decode($json_data);
 
-    echo "</ul>";
-?>
+            echo "<h2>Lista de los Pokemon:</h2>";
+            echo "<ul>";
 
+            foreach ($arrayPokemon->results as $pokemon) {
+                echo "<li>" . ucfirst($pokemon->name) . "</li>";
+            }
 
-</body>
+            echo "</ul>";
+        ?>
+
+    </body>
 </html>
