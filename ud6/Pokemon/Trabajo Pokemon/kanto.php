@@ -17,7 +17,7 @@
 <div id="iniciales">
 <?php
 	$ch = curl_init(); 
-	$url = "https://pokeapi.co/api/v2/pokemon/?limit=151";
+	$url = "https://pokeapi.co/api/v2/pokemon/?limit=1";
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	$json_data = curl_exec($ch);
@@ -25,11 +25,11 @@
 
 	$arrayPokemon = json_decode($json_data);
 
-	
+	foreach ($arrayPokemon->results as $pokemon) {
+        echo "<div id='entrada'><img src='" . ucfirst($pokemon->sprites->) . "' alt='' <br> <p>" . ucfirst($pokemon->name) . " </p></div>";
+    }
 ?>
 </div>
-
-
 <div class="abajo"></div>
 
 <footer> Trabajo &nbsp;<strong> Desarrollo Web en Entorno Servidor </strong>&nbsp; 2023/2024 IES Serra Perenxisa.</footer>

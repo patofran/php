@@ -10,7 +10,7 @@
         <?php
 
             $ch = curl_init(); 
-            $url = "https://pokeapi.co/api/v2/pokemon/?limit=20";
+            $url = "https://pokeapi.co/api/v2/pokemon/?limit=151";
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $json_data = curl_exec($ch);
