@@ -1,0 +1,149 @@
+* {
+	font-family: "Arial";
+}
+
+header {
+	background-image: url("img/container_bg.png");
+	font-weight: bold;
+	text-align: center;
+	height: 80px;
+	border: solid 1px;
+	border-top-right-radius: 20px;
+	border-top-left-radius: 20px;
+	background-color: orange;
+	color: blue;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+	text-shadow: 1px 1px 2px black, 0 0 1em orange, 0 0 0.2em orange;
+}
+
+header img {
+	width: 160px;
+	height: 60px;
+}
+
+table img {
+	float: right;
+	width: 120px;
+	height: 80px;
+	border-radius: 20px;
+	transform: rotate(15deg);
+	box-shadow: 0.1em 0.1em 0.05em black, 0 0 1em black, 0 0 0.2em black;
+}
+
+div {
+	float: both;
+	background-color: white;
+	width: 100%;
+	height: 5px;
+}
+
+#ult_entradas{
+	background-color: rgba(245, 222, 179, 0.5);
+	width: 350px;
+	height: 150px;
+	border-radius: 20px;
+	box-shadow: 4px 4px grey;
+}
+
+.entrada{
+	background-color: rgba(245, 222, 179, 0.5);
+	width: 500px;
+	height: 60px;
+	border-radius: 20px;
+	text-align:center;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	box-shadow: 4px 4px grey;
+}
+
+#separador_pie {
+	float: left;
+	background-color: white;
+	width: 100%;
+	height: 5px;
+}
+
+nav {
+	background-image: url("img/container_bg.png");
+	height: 40px;
+	background-color: wheat;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+}
+
+nav strong {
+	color: orange;
+	text-shadow: 1px 1px 2px black, 0 0 1em orange, 0 0 0.2em orange;
+}
+
+
+aside {
+	background-image: url("img/container_bg.png");
+	float: left;
+	width: 30%;
+	height: 500px;
+}
+
+aside h1 {
+	text-align: center;
+	color: white;
+	text-shadow: 0.1px 0.1px 0.2px gray, 0 0 0.5em black, 0 0 0.1em black;
+}
+
+#iniciales {
+	background-image: url("img/container_bg.png");
+	float: left;
+	width: 100%;
+	height: 500px;
+}
+
+section {
+	float: left;
+	background-color: grey;
+	height: 500px;
+	width: 0.3%;
+}
+
+article {
+	background-image: url("img/container_bg.png");
+	height: 500px;
+	width: 69.7%;
+	background-color: rgb(235, 192, 235);
+	float: left;
+}
+
+article table {
+	padding: 20px;
+}
+
+article table td {
+	padding-top: 20px;
+}
+
+article table .titulo {
+	color: white;
+	font-size: 24px;
+	text-shadow: 0.1px 0.1px 0.2px gray, 0 0 0.5em black, 0 0 0.1em black;
+}
+
+footer {
+	background-image: url("img/container_bg.png");
+	clear: both;
+	text-align: center;
+	height: 80px;
+	border: solid 1px;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	background-color: orange;
+	color: blue;
+	display:flex;
+	justify-content: center;
+	align-items: center; 
+	font-style: italic;
+}
