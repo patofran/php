@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Pokemon G1 Kanto</title>
+	<title>Pokemon G2 Johto</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
 <section id="contenido">
 	<?php
 			$ch = curl_init(); 
-			$url = "https://pokeapi.co/api/v2/pokemon/?limit=151";
+			$url = "https://pokeapi.co/api/v2/pokemon/?limit=100&offset=151";
 			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			$json_data = curl_exec($ch);
