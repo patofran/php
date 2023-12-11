@@ -10,7 +10,7 @@
  
 <header> Mi blog de &nbsp;&nbsp; <img src="img/International_Pokémon_logo.svg.png"></header>
 
-<nav><strong>G1 Kanto &nbsp;&nbsp; G2 Johto &nbsp;&nbsp; G3 Hoenn  &nbsp;&nbsp; G4 Sinnoh  &nbsp;&nbsp; G5 Unova  &nbsp;&nbsp; G6 Kalos  &nbsp;&nbsp; G7 Alola &nbsp;&nbsp; G8 Galar &nbsp;&nbsp; G9 Paldea &nbsp;&nbsp; Búsqueda</strong> </nav>
+<nav><strong><a href="kanto.php">G1 Kanto</a>&nbsp;&nbsp; <a href="johto.php">G2 Johto</a> &nbsp;&nbsp; <a href="hoenn.php">G3 Hoenn</a>  &nbsp;&nbsp; <a href="sinnoh">G4 Sinnoh</a> &nbsp;&nbsp; <a href="unova.php">G5 Unova</a> &nbsp;&nbsp; <a href="kalos.php">G6 Kalos</a> &nbsp;&nbsp;<a href="alola.php">G7 Alola</a> &nbsp;&nbsp; <a href="galar.php">G8 Galar</a> &nbsp;&nbsp;<a href="paldea.php">G9 Paldea</a> &nbsp;&nbsp; <a href="index.php">Búsqueda</a></strong> </nav>
 
 <section id="contenido">
 	<?php
@@ -28,7 +28,8 @@
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 				$datosPokemon = json_decode(curl_exec($ch));
 				curl_close($ch);
-				echo "<div id='ult_entradas'><img src='" . $datosPokemon->sprites->front_default . "' alt=''><p>" . ucfirst($pokemon->name) . " </p></div>";
+				echo "<div id='ult_entradas'><img src='" . $datosPokemon->sprites->front_default . "' alt=''><p>" . ucfirst($pokemon->name) . " </p>
+				<a href='infoPokemon.php?nombre=$pokemon->name'>info</a></div>";
 			}
 	?>
 </section>
