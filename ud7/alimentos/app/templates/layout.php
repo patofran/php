@@ -8,7 +8,7 @@
 </head>
 <body>
 	<header>
-		<h1>Información de alimentos</h1>
+		<h1>Informaciï¿½n de alimentos</h1>
 	</header>
 
 	<nav>
@@ -17,8 +17,8 @@
 			<li><a href="index.php?ctl=listar">ver alimentos</a></li>
 			<li><a href="index.php?ctl=insertar">insertar alimento</a></li>
 			<li><a href="index.php?ctl=buscar">buscar por nombre</a></li>
-			<li><a href="index.php?ctl=buscarAlimentosPorEnergia">buscar por energía</a></li>
-			<li><a href="index.php?ctl=buscarAlimentosCombinada">búsqueda combinada</a></li>
+			<li><a href="index.php?ctl=buscarAlimentosPorEnergia">buscar por energia</a></li>
+			<li><a href="index.php?ctl=buscarAlimentosCombinada">bï¿½squeda combinada</a></li>
 		</ul>
 	 </nav>
 

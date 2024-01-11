@@ -10,8 +10,8 @@ class Model {
 			
 			$this->conexion = $mvc_bd_conexion;
 		} catch (PDOException $e) {
-			$error = 'Falló la conexión: ' . $e->getMessage();
-			die('No ha sido posible realizar la conexión con la base de datos: '. $mvc_bd_conexion->connect_error);
+			$error = 'Fallï¿½ la conexiï¿½n: ' . $e->getMessage();
+			die('No ha sido posible realizar la conexiï¿½n con la base de datos: '. $mvc_bd_conexion->connect_error);
 		}
 	 }
 
@@ -35,6 +35,14 @@ class Model {
 	public function buscarAlimentosPorNombre($nombre){
 		$nombre = htmlspecialchars($nombre);
 		$sql = 'SELECT * FROM alimentos WHERE nombre LIKE "'. $nombre .'" ORDER BY energia DESC;';
+	
+		return $this->dameAlimentosDB($sql);
+	}
+
+	public function buscarAlimentosPorEnergia($minE, $maxE){
+		$minE = htmlspecialchars($minE);
+		$maxE = htmlspecialchars($maxE);
+		$sql = 'SELECT * FROM alimentos WHERE energia BETWEEN ' . $minE . ' AND ' . $maxE . ';';
 	
 		return $this->dameAlimentosDB($sql);
 	}

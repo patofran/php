@@ -72,6 +72,23 @@ class Controller
 		require __DIR__ . '/templates/buscarPorNombre.php';
 	}
 	
+	public function buscarPorEnergia() {
+		$params = array(
+			'minE' => 'minE',
+			'maxE' => 'maxE',
+			'resultado' => array()
+		);
+		$m = new Model(Config::$mvc_bd_nombre,
+					   Config::$mvc_bd_usuario,
+					   Config::$mvc_bd_clave,
+					   Config::$mvc_bd_hostname);
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			$params['minE'] = $_POST['minE'];
+			$params['maxE'] = $_POST['maxE'];
+			$params['resultado'] = $m->buscarAlimentosPorEnergia($_POST['minE'], $_POST['maxE']);
+		}
+		require __DIR__ . '/templates/buscarPorEnergia.php';
+	}
 	
 	public function ver() {
 		if (!isset($_GET['id'])) {

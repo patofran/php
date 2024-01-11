@@ -13,6 +13,7 @@ $map = array(
 	'listar' => array('controller' =>'Controller', 'action' =>'listar'),
 	'insertar' => array('controller' =>'Controller', 'action' =>'insertar'),
 	'buscar'=>array('controller' =>'Controller', 'action' =>'buscarPorNombre'),
+	'buscarAlimentosPorEnergia'=>array('controller' =>'Controller', 'action' =>'buscarPorEnergia'),
 	'ver' => array('controller' =>'Controller', 'action' =>'ver')
 );
 
