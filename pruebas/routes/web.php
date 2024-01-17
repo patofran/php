@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/greeting', function () {
-    return "hola";
+Route::get('/', function () {
+    return view('layouts.master');
+});
+
+Route::get('/child', function() {
+    return view('child');
 });
