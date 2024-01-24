@@ -13,27 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+use App\Http\Controllers\CatalogController;
 
+use App\Http\Controllers\HomeController;
 
-Route::get('/login', function(){
-    return view('aunth.login');
-});
+Route::get('/', [HomeController::class, 'getHome']);
 
-Route::get('/catalog', function () {
-    return view('catalog.index');
-});
+Route::get('/catalog', [catalogController::class, 'getIndex']);
 
-Route::get('/catalog/show/{id}', function () {
-    return view('catalog.show', array('id'=>$id));
-});
+Route::get('/catalog/show/{id}', [catalogController::class, 'getShow']);
 
-Route::get('/catalog/create', function () {
-    return view('catalog.create');
-});
+Route::get('/catalog/create', [catalogController::class, 'getCreate']);
 
-Route::get('/catalog/edit/{id}', function () {
-    return view('catalog.edit');
-});
+Route::get('/catalog/edit', [catalogController::class, 'getEdit']);
+
