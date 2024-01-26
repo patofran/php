@@ -17,7 +17,7 @@ use App\Http\Controllers\CatalogController;
 
 use App\Http\Controllers\HomeController;
 
-Route::get('/', [HomeController::class, 'getHome']);
+Route::get('/', [catalogController::class, 'getIndex']);
 
 Route::get('/catalog', [catalogController::class, 'getIndex']);
 

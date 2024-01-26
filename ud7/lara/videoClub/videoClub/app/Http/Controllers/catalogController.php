@@ -6,11 +6,12 @@ class CatalogController extends Controller{
 
     public function getIndex(){
         require_once 'array_peliculas.php';
-        return view('catalog.index', ['arrayPeliculas', $arrayPeliculas]);
+        return view('catalog.index', ['arrayPeliculas' => $arrayPeliculas]);
     }
 
     public function getShow($id){
-        return view('catalog.show', array('id'=>$id));
+        require_once 'array_peliculas.php';
+        return view('catalog.show', ['infoPelicula' => $arrayPeliculas[$id]]);
     }
 
     public function getCreate(){
