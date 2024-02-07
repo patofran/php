@@ -16,7 +16,6 @@ use App\Http\Controllers\homeController;
 
 Route::get('/', [catalogController::class, 'getIndex']);
 
-
 require __DIR__.'/auth.php';
 
 Route::middleware(['auth'])->group(function () {
