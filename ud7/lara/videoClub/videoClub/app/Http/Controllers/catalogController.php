@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\Pelicula;
 
-
 class CatalogController extends Controller{
 
     public function getIndex(){

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-use App\Http\Controllers\CatalogController;
+Route::get('/', function () {
+    return view('home');
+});
 
-use App\Http\Controllers\HomeController;
-
-Route::get('/', [catalogController::class, 'getIndex']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/catalog', [catalogController::class, 'getIndex']);
 
@@ -27,3 +30,10 @@ Route::get('/catalog/create', [catalogController::class, 'getCreate']);
 
 Route::get('/catalog/edit', [catalogController::class, 'getEdit']);
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
