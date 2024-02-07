@@ -15,20 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/catalog', [catalogController::class, 'getIndex']);
-
-Route::get('/catalog/show/{id}', [catalogController::class, 'getShow']);
-
-Route::get('/catalog/create', [catalogController::class, 'getCreate']);
-
-Route::get('/catalog/edit', [catalogController::class, 'getEdit']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
