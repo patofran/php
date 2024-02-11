@@ -4,19 +4,20 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\coche;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        // \App\Models\User::factory(10)->create();
+    public function run(): void{
+        self::meterCoche();
+        $this->command->info("coche guardado con exito");
+    }
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+    static private function meterCoche(){
+        $c = new coche;
+        $c->marca = "Toyota";
+        $c->modelo = "Corolla";
+        $c->precio = 20000;
+        $c->save();
     }
 }

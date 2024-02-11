@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void{
         Schema::create('facturas', function (Blueprint $table) {
-            
-            $table->unsignedBigInteger('id_coches');
-            $table->foreignId('id_coches')->references('id')->on('coches');
-
-            $table->unsignedBigInteger('id_clientes');
-            $table->foreignId('id_clientes')->references('id')->on('clientes');
+            $table->foreignId('cliente_id')->constrained(
+                table: 'cliente', indexName: 'id_factura_cliente'
+            );
+            $table->foreignId('coche_id')->constrained(
+                table: 'coche', indexName: 'id_factura_coche'
+            );
             $table->date('fecha');
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(): void{
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('facturas');
     }
 };
