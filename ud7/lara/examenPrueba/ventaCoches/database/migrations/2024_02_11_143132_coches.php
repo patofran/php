@@ -10,11 +10,12 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void{
-        Schema::create('coche', function (Blueprint $table) {
+        Schema::create('coches', function (Blueprint $table) {
             $table->id();
             $table->string('marca');
             $table->string('modelo');
             $table->integer('precio');
+            $table->timestamps();
         });
     }
 

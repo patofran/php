@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void{
         Schema::create('facturas', function (Blueprint $table) {
             $table->foreignId('cliente_id')->constrained(
-                table: 'cliente', indexName: 'id_factura_cliente'
+                table: 'clientes', indexName: 'id_factura_cliente'
             );
             $table->foreignId('coche_id')->constrained(
-                table: 'coche', indexName: 'id_factura_coche'
+                table: 'coches', indexName: 'id_factura_coche'
             );
             $table->date('fecha');
+            $table->timestamps();
         });
     }
 
