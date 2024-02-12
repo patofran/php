@@ -20,7 +20,6 @@ class APIController extends Controller
             if ($response->successful()) {
                 // Si la solicitud fue exitosa, obtenemos los datos en formato JSON
                 $datos = $response->json();
-
                 // Retornamos una vista con los datos obtenidos de la API
                 return view('datosAPI', ['datos' => $datos]);
             } else {

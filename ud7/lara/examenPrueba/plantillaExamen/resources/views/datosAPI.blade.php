@@ -4,13 +4,13 @@
     <title>Datos de la API</title>
 </head>
 <body>
-    <h1>Datos de la API</h1>
+    <h1>Datos de la APITO</h1>
     <ul>
         @foreach($datos as $vehiculo)
             <li>
                 Marca: {{ $vehiculo['marca'] }} <br>
                 Modelo: {{ $vehiculo['modelo'] }} <br>
-                Fecha: {{ $vehiculo['tipo'] }} <br>
+                fecha: {{ $vehiculo['fecha'] }} <br>
             </li>
         @endforeach
 
