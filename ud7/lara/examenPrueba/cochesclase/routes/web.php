@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\CocheController;
+use App\Http\Controllers\ClienteController;
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('inicio');
 });
+
+Route::get('/listaCoches', [CocheController::class, 'index']);
+Route::get('/listaClientes', [ClienteController::class, 'index']);
