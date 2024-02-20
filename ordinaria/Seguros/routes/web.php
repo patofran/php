@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\clientesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+//ruta clientes
+Route::get('/listaCLientes', [clientesController::class, 'mostrar'])->name('listaClientes');
+Route::post('/guardarCliente', [clientesController::class, 'guardar'])->name('guardar-cliente');
+Route::delete('/borrarCliente{cliente}', [clientesController::class, 'borrar'])->name('borrar-cliente');
+Route::get('/editarCliente/{cliente}', [clientesController::class, 'editar'])->name('editar-cliente');
+Route::patch('/actualizarCliente/{cliente}', [clientesController::class, 'actualizar'])->name('actualizar-cliente');
+
 
 Route::get('/', function () {
     return view('welcome');

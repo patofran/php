@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class poliza extends Model
 {
-    use HasFactory;
+    protected $poliza = ['id_vehiculo', 'importe', 'fecha_caducidad'];
 }
