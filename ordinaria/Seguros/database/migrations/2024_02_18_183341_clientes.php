@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Poliza', function (Blueprint $table) {
+        Schema::create('Clientes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_vehiculo')->constrained('Vehiculos')->onDelete('cascade');
-            $table->integer('importe');
-            $table->integer('fecha_caducidad');
+            $table->string('dni');
+            $table->string('nombre');
+            $table->string('apellidos');
+            $table->integer('telefono');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Poliza');
+        Schema::dropIfExists('Clientes');
     }
 };
