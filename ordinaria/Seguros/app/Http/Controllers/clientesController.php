@@ -39,6 +39,7 @@ class clientesController extends Controller{
         return redirect()->route('listaClientes');
     }
 
+    //funcion para editar y actualizar
     public function editar(cliente $cliente){
         return view('editarcliente', compact('cliente'));
     }
@@ -52,7 +53,6 @@ class clientesController extends Controller{
         ]);
     
         $cliente->update($request->all());
-    
         return redirect()->route('listaClientes')->with('success', 'Cliente actualizado correctamente');
     }
     
