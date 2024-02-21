@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class vehiculo extends Model
 {
-    use HasFactory;
+    protected $fillable  = ['id_cliente', 'marca', 'modelo', 'matricula'];
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\clientesController;
+use App\Http\Controllers\vehiculosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,13 @@ Route::post('/guardarCliente', [clientesController::class, 'guardar'])->name('gu
 Route::delete('/borrarCliente{cliente}', [clientesController::class, 'borrar'])->name('borrar-cliente');
 Route::get('/editarCliente/{cliente}', [clientesController::class, 'editar'])->name('editar-cliente');
 Route::patch('/actualizarCliente/{cliente}', [clientesController::class, 'actualizar'])->name('actualizar-cliente');
+
+//rutas vehiculos
+Route::get('/listaVehiculos', [vehiculosController::class, 'mostrar'])->name('listaVehiculos');
+Route::post('/guardarVehiculo', [vehiculosController::class, 'guardar'])->name('guardar-vehiculo');
+Route::get('/editarVehiculo/{vehiculo}', [vehiculosController::class, 'editar'])->name('editar-vehiculo');
+Route::patch('/actualizarVehiculo/{vehiculo}', [vehiculosController::class, 'actualizar'])->name('actualizar-vehiculo');
+Route::delete('/eliminarVehiculo/{vehiculo}', [vehiculosController::class, 'eliminar'])->name('eliminar-vehiculo');
 
 
 Route::get('/', function () {
