@@ -7,18 +7,17 @@
         <title>Bootstrap Example</title>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Menu Inicial Seguros
-        </h2>
-    </x-slot>
-
-    <div class="container-fluid d-flex justify-content-around m-5">
-    <a href="{{ route('listaClientes') }}" class="btn btn-primary">Listado de los Clientes</a>
-    <a href="{{ route('listaVehiculos') }}" class="btn btn-primary">Listado de los Vehiculos</a>
-    <a href="{{ route('listaPolizas') }}" class="btn btn-primary">Listado de las Polizas</a>
-    <button type="button" class="btn btn-primary">Listado de los Siniestros</button>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid d-flex justify-content-around">
+        <h3>Manejo de los seguros</h3>
+        <a href="{{ route('listaClientes') }}" class="btn btn-primary">Listado de los Clientes</a>
+        <a href="{{ route('listaVehiculos') }}" class="btn btn-primary">Listado de los Vehiculos</a>
+        <a href="{{ route('listaPolizas') }}" class="btn btn-primary">Listado de las Polizas</a>
+        <a href="{{ route('listaSiniestros') }}" class="btn btn-primary">Listado de los siniestros</a>
     </div>
+</nav>
+
+  <h1 class="text-center">Pagina de manejo de los seguros de los coches <span class="badge text-bg-secondary m-5">New</span></h1>
 
     
 </x-app-layout>

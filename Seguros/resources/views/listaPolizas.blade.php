@@ -9,6 +9,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid d-flex justify-content-around">
+            <h3>Manejo de los seguros</h3>
+            <a href="{{ route('listaClientes') }}" class="btn btn-primary">Listado de los Clientes</a>
+            <a href="{{ route('listaVehiculos') }}" class="btn btn-primary">Listado de los Vehiculos</a>
+            <a href="{{ route('listaPolizas') }}" class="btn btn-primary">Listado de las Polizas</a>
+            <a href="{{ route('listaSiniestros') }}" class="btn btn-primary">Listado de los siniestros</a>
+        </div>
+  </nav>
     <h1 class="text-center">Listado de las polizas</h1> 
     <div class="container-fluid p-5">
         <table class="table table-bordered">

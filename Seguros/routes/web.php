@@ -40,11 +40,11 @@ Route::patch('/actualizarPoliza/{poliza}', [polizaController::class, 'actualizar
 Route::delete('/eliminarPoliza/{poliza}', [polizaController::class, 'eliminar'])->name('eliminar-poliza');
 
 //rutas de siniestros
-Route::get('/listaPolizas', [siniestrosController::class, 'mostrar'])->name('listaPolizas');
-Route::post('/guardarPoliza', [siniestrosController::class, 'guardar'])->name('guardar-poliza');
-Route::get('/editarPoliza/{poliza}', [siniestrosController::class, 'editar'])->name('editar-poliza');
-Route::patch('/actualizarPoliza/{poliza}', [siniestrosController::class, 'actualizar'])->name('actualizar-poliza');
-Route::delete('/eliminarPoliza/{poliza}', [siniestrosController::class, 'eliminar'])->name('eliminar-poliza');
+Route::get('/listaSiniestros', [siniestrosController::class, 'mostrar'])->name('listaSiniestros');
+Route::post('/guardarSiniestro', [siniestrosController::class, 'guardar'])->name('guardar-siniestro');
+Route::get('/editarSiniestro/{siniestro}', [siniestrosController::class, 'editar'])->name('editar-siniestro');
+Route::patch('/actualizarSiniestro/{siniestro}', [siniestrosController::class, 'actualizar'])->name('actualizar-siniestro');
+Route::delete('/eliminarSiniestro/{siniestro}', [siniestrosController::class, 'eliminar'])->name('eliminar-siniestro');
 
 Route::get('/', function () {
     return view('welcome');
