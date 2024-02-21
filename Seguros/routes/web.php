@@ -42,7 +42,7 @@ Route::delete('/eliminarPoliza/{poliza}', [polizaController::class, 'eliminar'])
 //rutas de siniestros
 Route::get('/listaSiniestros', [siniestrosController::class, 'mostrar'])->name('listaSiniestros');
 Route::post('/guardarSiniestro', [siniestrosController::class, 'guardar'])->name('guardar-siniestro');
-Route::get('/editarSiniestro/{siniestro}', [siniestrosController::class, 'editar'])->name('editar-siniestro');
+Route::get('/editarSiniestros/{siniestro}', [siniestrosController::class, 'editar'])->name('editar-siniestros');
 Route::patch('/actualizarSiniestro/{siniestro}', [siniestrosController::class, 'actualizar'])->name('actualizar-siniestro');
 Route::delete('/eliminarSiniestro/{siniestro}', [siniestrosController::class, 'eliminar'])->name('eliminar-siniestro');
 

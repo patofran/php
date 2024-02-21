@@ -41,12 +41,12 @@
                         <th>{{ $siniestro->provincia }}</th>
                         <th>{{ $siniestro->documento }}</th>
                         <td> 
-                            <form method="GET" action="{{ route('editar-siniestro', $siniestro) }}">
+                            <form method="GET" action="{{ route('editarSiniestros', $siniestro) }}">
                                 <button type="submit" class="btn btn-warning">Editar</button>
                             </form>
                         </td>
                         <td> 
-                            <form action="{{ route('eliminar-siniestro', $siniestro) }}" method="POST">
+                            <form action="{{ route('eliminar-siniestros', $siniestro) }}" method="POST">
                                  @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Eliminar</button>

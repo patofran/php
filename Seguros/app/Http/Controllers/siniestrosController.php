@@ -33,12 +33,12 @@ class siniestrosController extends Controller{
         $siniestro->documento = $request->documento;
         $siniestro->save();
 
-        return redirect()->route('listaSiniestro', $siniestro);
+        return redirect()->route('listaSiniestros', $siniestro);
     }
 
     //funcion para editar y actualizar
     public function editar(siniestro $siniestro){
-        return view('editarSiniestro', compact('siniestro'));
+        return view('editar-siniestros', compact('siniestro'));
     }
 
     public function actualizar(Request $request, siniestro $siniestro){
