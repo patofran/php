@@ -16,7 +16,7 @@
     <div class="container-fluid d-flex justify-content-around m-5">
     <a href="{{ route('listaClientes') }}" class="btn btn-primary">Listado de los Clientes</a>
     <a href="{{ route('listaVehiculos') }}" class="btn btn-primary">Listado de los Vehiculos</a>
-    <button type="button" class="btn btn-primary">Listado de los Polizas</button>
+    <a href="{{ route('listaPolizas') }}" class="btn btn-primary">Listado de las Polizas</a>
     <button type="button" class="btn btn-primary">Listado de los Siniestros</button>
     </div>
 

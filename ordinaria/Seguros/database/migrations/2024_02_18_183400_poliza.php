@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_vehiculo')->constrained('Vehiculos')->onDelete('cascade');
             $table->integer('importe');
-            $table->integer('fecha_caducidad');
+            $table->date('fecha_caducidad');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\clientesController;
 use App\Http\Controllers\vehiculosController;
+use App\Http\Controllers\polizaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,12 @@ Route::get('/editarVehiculo/{vehiculo}', [vehiculosController::class, 'editar'])
 Route::patch('/actualizarVehiculo/{vehiculo}', [vehiculosController::class, 'actualizar'])->name('actualizar-vehiculo');
 Route::delete('/eliminarVehiculo/{vehiculo}', [vehiculosController::class, 'eliminar'])->name('eliminar-vehiculo');
 
+//rutas de poliza
+Route::get('/listaPolizas', [polizaController::class, 'mostrar'])->name('listaPolizas');
+Route::post('/guardarPoliza', [polizaController::class, 'guardar'])->name('guardar-poliza');
+Route::get('/editarPoliza/{poliza}', [polizaController::class, 'editar'])->name('editar-poliza');
+Route::patch('/actualizarPoliza/{poliza}', [polizaController::class, 'actualizar'])->name('actualizar-poliza');
+Route::delete('/eliminarPoliza/{poliza}', [polizaController::class, 'eliminar'])->name('eliminar-poliza');
 
 Route::get('/', function () {
     return view('welcome');
