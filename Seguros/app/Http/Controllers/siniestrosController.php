@@ -31,8 +31,8 @@ class siniestrosController extends Controller{
         $siniestro->comunidad = $request->comunidad;
         $siniestro->provincia = $request->provincia;
         $siniestro->documento = $request->documento;
-
         $siniestro->save();
+
         return redirect()->route('listaSiniestro', $siniestro);
     }
 
